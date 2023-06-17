@@ -4,9 +4,9 @@ import { FavIcon } from './FavIcon';
 import '../styles/PhotoFavButton.scss';
 
 const PhotoFavButton = (props) => {
-  const { isFavorite, onClick } = props;
+  const { isFavorite, onToggleFavorite } = props;
   const handleClick = () => {
-    onClick();
+    onToggleFavorite();
   };
 
   return (
