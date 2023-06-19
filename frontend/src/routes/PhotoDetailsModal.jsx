@@ -38,12 +38,12 @@ export const PhotoDetailsModal = (props) => {
       <div className='photo-details-modal__top-bar'>
         <div>
           <PhotoFavButton isFavorite={isFavorite} onToggleFavorite={handleFavoriteToggle} />
-          <img className='photo-details-modal__image' src={photo.urls.full} alt='Full Photo' />
+          <img className='photo-details-modal__image' src={photo.urls.full} alt='Full Photo'/>
           <div className='photo-list__user-details'>
             <img className='photo-list__user-profile' src={photo.user.profile} alt="User Profile" />
             <div>
             <div className='photo-list__user-info'>
-              {photo.user.name}
+              {photo.user.username}
             </div>
             <div className='photo-list__user-location'>
               {photo.location.city} {photo.location.country}

@@ -44,7 +44,7 @@ export const ACTIONS = {
   CLOSE_MODAL: 'CLOSE_MODAL'
 }
 
-function reducer(state, action) {
+const reducer = function(state, action) {
   switch (action.type) {
     case ACTIONS.FAV_PHOTO_ADDED:
       return {

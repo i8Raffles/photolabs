@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.scss';
 import HomeRoute from './routes/HomeRoute';
 import { PhotoDetailsModal } from './routes/PhotoDetailsModal';
@@ -12,64 +12,65 @@ const App = () => {
     favoritePhotos,
     closeModal,
     openModal,
-    toggleFavorite,
+    toggleFavorite
   } = useApplicationData();
 
   const [photos, setPhotos] = useState([]);
   const [topics, setTopics] = useState([]);
 
   useEffect(() => {
-    const fetchPhotos = () => {
-      fetch('http://localhost:8001/api/photos')
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error('Failed to fetch photos');
-          }
-          return response.json();
-        })
-        .then((data) => {
-          setPhotos(data);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    };
-  
-    const fetchTopics = () => {
-      fetch('http://localhost:8001/api/topics')
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error('Failed to fetch topics');
-          }
-          return response.json();
-        })
-        .then((data) => {
-          setTopics(data);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    };
-
-    const fetchPhotosByTopic = (topicId) => {
-      fetch(`http://localhost:8001/api/topics/photos/${topicId}`)
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error('Failed to fetch photos for the topic');
-          }
-          return response.json();
-        })
-        .then((data) => {
-          setPhotos(data);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    };
-
     fetchPhotos();
     fetchTopics();
   }, []);
+  const fetchPhotos = () => {
+    fetch('/api/photos')
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Failed to fetch photos');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setPhotos(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const fetchTopics = () => {
+    fetch('/api/topics')
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Failed to fetch topics');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setTopics(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+
+
+  const fetchPhotosByTopic = (topicId) => {
+    fetch(`/api/topics/photos/${topicId}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Failed to fetch photos for the topic');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setPhotos(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
   // const [isModalOpen, setIsModalOpen] = useState(false);
   // const [selectedPhoto, setSelectedPhoto] = useState(null);
   // const [favoritePhotos, setFavoritePhotos] = useState([]);
@@ -94,6 +95,7 @@ const App = () => {
   return (
     <div className="App">
       <HomeRoute
+        fetchPhotosByTopic={fetchPhotosByTopic}
         photos={photos}
         topics={topics}
         openModal={openModal}

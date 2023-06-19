@@ -4,7 +4,7 @@ import PhotoFavButton from './PhotoFavButton';
 import '../styles/PhotoListItem.scss';
 
 const PhotoListItem = (props) => {
-  const { id, location, imageSource, name, profile, isFavorite, onToggleFavorite, openModal, photo } = props;
+  const { id, location, imageSource, username, profile, isFavorite, onToggleFavorite, openModal, photo } = props;
 
   const handleFavoriteToggle = () => {
     onToggleFavorite(id);
@@ -22,7 +22,7 @@ const PhotoListItem = (props) => {
       <div className='photo-list__user-details'>
         <img className='photo-list__user-profile' src={profile} alt="User Profile" />
         <div className='photo-list__user-info'>
-          {name}
+          {username}
         </div>
         <div className='photo-list__user-location'>
           {location.city} {location.country}
