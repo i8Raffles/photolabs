@@ -1,27 +1,113 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './App.scss';
 import HomeRoute from './routes/HomeRoute';
-import photos from './mocks/photos';
-import topics from './mocks/topics';
-import { PhotoDetailsModal } from './routes/PhotoDetailsModal'
+import { PhotoDetailsModal } from './routes/PhotoDetailsModal';
+import useApplicationData from './hooks/useApplicationData';
 
 
 const App = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const {
+    isModalOpen,
+    selectedPhoto,
+    favoritePhotos,
+    closeModal,
+    openModal,
+    toggleFavorite,
+  } = useApplicationData();
 
+  const [photos, setPhotos] = useState([]);
+  const [topics, setTopics] = useState([]);
+
+  useEffect(() => {
+    const fetchPhotos = () => {
+      fetch('http://localhost:8001/api/photos')
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Failed to fetch photos');
+          }
+          return response.json();
+        })
+        .then((data) => {
+          setPhotos(data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    };
   
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-  
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-  
+    const fetchTopics = () => {
+      fetch('http://localhost:8001/api/topics')
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Failed to fetch topics');
+          }
+          return response.json();
+        })
+        .then((data) => {
+          setTopics(data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    };
+
+    const fetchPhotosByTopic = (topicId) => {
+      fetch(`http://localhost:8001/api/topics/photos/${topicId}`)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Failed to fetch photos for the topic');
+          }
+          return response.json();
+        })
+        .then((data) => {
+          setPhotos(data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    };
+
+    fetchPhotos();
+    fetchTopics();
+  }, []);
+  // const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [selectedPhoto, setSelectedPhoto] = useState(null);
+  // const [favoritePhotos, setFavoritePhotos] = useState([]);
+
+  // const closeModal = () => {
+  //   setIsModalOpen(false);
+  // };
+
+  // const openModal = (photo) => {
+  //   setSelectedPhoto(photo);
+  //   setIsModalOpen(true);
+  // };
+
+  // const toggleFavorite = (photoId) => {
+  //   if (favoritePhotos.includes(photoId)) {
+  //     setFavoritePhotos(favoritePhotos.filter((id) => id !== photoId));
+  //   } else {
+  //     setFavoritePhotos([...favoritePhotos, photoId]);
+  //   }
+  // };
+
   return (
     <div className="App">
-      <HomeRoute photos={photos} topics={topics} openModal={openModal} />
-      {isModalOpen && <PhotoDetailsModal closeModal={closeModal} />}
+      <HomeRoute
+        photos={photos}
+        topics={topics}
+        openModal={openModal}
+        onToggleFavorite={toggleFavorite}
+        favoritePhotos={favoritePhotos}
+      />
+      {isModalOpen && selectedPhoto && (
+        <PhotoDetailsModal
+          photo={selectedPhoto}
+          closeModal={closeModal}
+          onToggleFavorite={toggleFavorite}
+          favoritePhotos={favoritePhotos}
+        />
+      )}
     </div>
   );
 };

@@ -1,9 +1,18 @@
-import React from 'react';
-
+import React, { useState } from 'react';
+import PhotoList from '../components/PhotoList';
 import '../styles/PhotoDetailsModal.scss';
+import PhotoFavButton from '../components/PhotoFavButton';
+
 
 export const PhotoDetailsModal = (props) => {
-  const { closeModal } = props;
+  const { photo, closeModal, onToggleFavorite, favoritePhotos } = props;
+  const [isFavorite, setIsFavorite] = useState(favoritePhotos.includes(photo.id));
+
+  const handleFavoriteToggle = (photoId) => {
+    setIsFavorite(!isFavorite);
+    onToggleFavorite(photoId !== undefined ? photoId : photo.id);
+  };
+
 
   const handleCloseModal = () => {
     closeModal();
@@ -24,8 +33,32 @@ export const PhotoDetailsModal = (props) => {
           </defs>
         </svg>
       </button>
+
+
+      <div className='photo-details-modal__top-bar'>
+        <div>
+          <PhotoFavButton isFavorite={isFavorite} onToggleFavorite={handleFavoriteToggle} />
+          <img className='photo-details-modal__image' src={photo.urls.full} alt='Full Photo' />
+          <div className='photo-list__user-details'>
+            <img className='photo-list__user-profile' src={photo.user.profile} alt="User Profile" />
+            <div>
+            <div className='photo-list__user-info'>
+              {photo.user.name}
+            </div>
+            <div className='photo-list__user-location'>
+              {photo.location.city} {photo.location.country}
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className='photo-details-modal__images'>
+      <header className='photo-details-modal__header'>Similar Photos</header>
+
+        <PhotoList photos={Object.values(photo.similar_photos)} onToggleFavorite={handleFavoriteToggle} isFavorite={photo.isFavorite} favoritePhotos={favoritePhotos} />
+
+      </div>
+
     </div>
   );
 };
-
-export default PhotoDetailsModal;

@@ -19,6 +19,7 @@ const PhotoList = (props) => {
           isFavorite={favoritePhotos.includes(photo.id)}
           onToggleFavorite={onToggleFavorite}
           openModal={openModal}
+          photo={photo}
         />
       ))}
     </ul>
