@@ -53,7 +53,7 @@ export const PhotoDetailsModal = (props) => {
         </div>
       </div>
       <div className='photo-details-modal__images'>
-      <header className='photo-details-modal__header'>Similar Photos</header>
+      <header className='photo-details-modal__header'>Related Photos</header>
 
         <PhotoList photos={Object.values(photo.similar_photos)} onToggleFavorite={handleFavoriteToggle} isFavorite={photo.isFavorite} favoritePhotos={favoritePhotos} />
 

@@ -8,9 +8,11 @@
   text-decoration: none;
   font-weight: 500;
   color: #2b2b2b;
+  transition: 0.3s;
 
   &:hover {
     text-decoration: overline;
     color: goldenrod;
+    cursor: pointer;
   }
 }
