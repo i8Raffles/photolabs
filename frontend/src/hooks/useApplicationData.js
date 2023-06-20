@@ -113,7 +113,6 @@ export default function useApplicationData() {
       dispatch({ type: ACTIONS.FAV_PHOTO_ADDED, photoId });
     }
   };
-
   
 
   return {
