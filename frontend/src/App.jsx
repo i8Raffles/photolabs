@@ -17,6 +17,9 @@ const App = () => {
 
   const [photos, setPhotos] = useState([]);
   const [topics, setTopics] = useState([]);
+  const [light, setLight] = useState('on');
+  const switchLight = () => setLight((light === "on") ? "off" : "on");
+  const dark = (light === 'off') ? 'dark' : '';
 
 
   const fetchPhotos = () => {
@@ -74,8 +77,10 @@ const App = () => {
   };
 
   return (
-    <div className="App">
+    <div className={`App ${dark}`}>
       <HomeRoute
+        light={light} 
+        switchLight={switchLight}
         fetchPhotosByTopic={fetchPhotosByTopic}
         photos={photos}
         topics={topics}

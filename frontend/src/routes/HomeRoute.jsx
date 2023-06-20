@@ -5,14 +5,14 @@ import '../styles/HomeRoute.scss';
 
 
 const HomeRoute = (props) => {
-  const { topics, photos, openModal, onToggleFavorite, favoritePhotos, fetchPhotosByTopic } = props;
+  const { topics, photos, openModal, onToggleFavorite, favoritePhotos, fetchPhotosByTopic, light, switchLight } = props;
   
   const isFavPhotoExist = favoritePhotos.length > 0;
   
 
   return (
     <div className="home-route">
-      <TopNavigation topics={topics} isFavPhotoExist={isFavPhotoExist} fetchPhotosByTopic={fetchPhotosByTopic}/>
+      <TopNavigation topics={topics} isFavPhotoExist={isFavPhotoExist} fetchPhotosByTopic={fetchPhotosByTopic} light={light} switchLight={switchLight}/>
       <PhotoList
         photos={photos}
         favoritePhotos={favoritePhotos}

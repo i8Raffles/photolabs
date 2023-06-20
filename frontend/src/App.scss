@@ -1,6 +1,12 @@
 .App {
   margin: 24px;
 }
+.App.dark,
+.App.dark button {
+  background: #222;
+  border-color: white;
+  color: white;
+}
 
 .App-logo {
   height: 40vmin;
