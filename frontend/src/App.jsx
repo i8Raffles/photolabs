@@ -18,10 +18,7 @@ const App = () => {
   const [photos, setPhotos] = useState([]);
   const [topics, setTopics] = useState([]);
 
-  useEffect(() => {
-    fetchPhotos();
-    fetchTopics();
-  }, []);
+  
   const fetchPhotos = () => {
     fetch('/api/photos')
       .then((response) => {
@@ -36,10 +33,10 @@ const App = () => {
       .catch((error) => {
         console.error(error);
       });
-  };
-
-  const fetchTopics = () => {
-    fetch('/api/topics')
+    };
+    
+    const fetchTopics = () => {
+      fetch('/api/topics')
       .then((response) => {
         if (!response.ok) {
           throw new Error('Failed to fetch topics');
@@ -52,12 +49,16 @@ const App = () => {
       .catch((error) => {
         console.error(error);
       });
-  };
-
-
-
-  const fetchPhotosByTopic = (topicId) => {
-    fetch(`/api/topics/photos/${topicId}`)
+    };
+    
+    useEffect(() => {
+      fetchPhotos();
+      fetchTopics();
+    }, []);
+    
+    
+    const fetchPhotosByTopic = (topicId) => {
+      fetch(`/api/topics/photos/${topicId}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Failed to fetch photos for the topic');
