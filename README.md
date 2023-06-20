@@ -2,6 +2,13 @@
 
 Photolabs is a single page application for the purpose of viewing photos. The project was primarily created using React. Users are able to view photos on the page, filter those photos by categories and like photos.
 
+## Screenshots
+
+![PhotoLabs - HomePage](https://github.com/i8Raffles/photolabs/blob/main/docs/Home-Page.PNG?raw=true)
+
+![PhotoLabs - Modal](https://github.com/i8Raffles/photolabs/blob/main/docs/Modal.PNG?raw=true)
+
+![PhotoLabs - Topics + Favorites](https://github.com/i8Raffles/photolabs/blob/main/docs/Favorite_and_Categories.PNG?raw=true)
 
 ## Setup
 
@@ -22,6 +29,9 @@ Read `backend/readme` for further setup details.
 cd backend
 npm start
 ```
+## [Browser] Running Application
+Navigate to http://localhost:3000/ on a browser of your choice to view PhotoLabs
+
 ## Using the Application
 - You can favorite a photo by clicking on the heart icon, which then turns red
 - You are able to click on any photo and a modal opens up showing a larger version of that photo along with related photos underneath
