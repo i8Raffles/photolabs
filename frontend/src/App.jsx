@@ -71,26 +71,6 @@ const App = () => {
         console.error(error);
       });
   };
-  // const [isModalOpen, setIsModalOpen] = useState(false);
-  // const [selectedPhoto, setSelectedPhoto] = useState(null);
-  // const [favoritePhotos, setFavoritePhotos] = useState([]);
-
-  // const closeModal = () => {
-  //   setIsModalOpen(false);
-  // };
-
-  // const openModal = (photo) => {
-  //   setSelectedPhoto(photo);
-  //   setIsModalOpen(true);
-  // };
-
-  // const toggleFavorite = (photoId) => {
-  //   if (favoritePhotos.includes(photoId)) {
-  //     setFavoritePhotos(favoritePhotos.filter((id) => id !== photoId));
-  //   } else {
-  //     setFavoritePhotos([...favoritePhotos, photoId]);
-  //   }
-  // };
 
   return (
     <div className="App">
