@@ -12,7 +12,7 @@ const TopNavigation = (props) => {
     <div className="top-nav-bar">
       <span className="top-nav-bar__logo">PhotoLabs</span>
       <TopicList topics={topics} fetchPhotosByTopic={fetchPhotosByTopic}/>
-      <button onClick={handleClick}>
+      <button className="button-55" onClick={handleClick}>
       {light === "on" && <span className="on">Dark Mode</span>}
       {light === "off" && <span className="off">Light Mode</span>}
       </button>
